@@ -1,0 +1,7 @@
+Name
+Description
+Installation instructions
+Usage instructions
+Support instructions
+Contributing instructions
+Licence
