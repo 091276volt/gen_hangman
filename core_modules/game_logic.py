@@ -5,6 +5,7 @@
 # Maintain a list of incorrect guesses.
 
 import random
+from core_modules.input_handling import validate_guess
 
 # Hangman stages as ASCII art
 hangman_stages = [
