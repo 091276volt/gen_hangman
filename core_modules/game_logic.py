@@ -6,6 +6,7 @@
 
 import random
 from core_modules.input_handling import validate_guess
+from core_modules.display_output import display_game_state, display_message
 
 # Hangman stages as ASCII art
 hangman_stages = [
@@ -93,29 +94,24 @@ def play_game(word_list):
 
     while lives > 0:
         # Display the game state
-        print(hangman_stages[len(hangman_stages) - 1 - lives])
-        print(f"\nWord: {display_word(word, guessed_letters)}")
-        print(f"Guessed Letters: {', '.join(sorted(guessed_letters))}")
-        print(f"Lives Left: {lives}")
+        display_game_state(hangman_stages, lives, word, guessed_letters)
 
-        # Player input
-        guess = input("Enter a letter: ").lower()
+        # Get and validate player input
+        guess = validate_guess(guessed_letters)
 
-        # Input validation and game logic
-        if guess in guessed_letters:
-            print("You already guessed that letter.")
-        elif guess in word:
+        # Game logic
+        if guess in word:
             guessed_letters.add(guess)
-            print("Correct!")
+            display_message("Correct!")
             if set(word) <= guessed_letters:
-                print(f"Congratulations! You guessed the word: {word}")
+                display_message(f"Congratulations! You guessed the word: {word}")
                 break
         else:
             guessed_letters.add(guess)
             lives -= 1
-            print("Wrong!")
+            display_message("Wrong!")
 
     # Game over logic
     if lives == 0:
-        print(hangman_stages[-1])
-        print(f"Game Over! The word was: {word}")
+        display_game_state(hangman_stages, 0, word, guessed_letters)
+        display_message(f"Game Over! The word was: {word}")
