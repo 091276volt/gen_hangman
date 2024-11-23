@@ -6,20 +6,6 @@
 
 import random
 
-# Temporary word list (to be replaced by a word selection module later)
-word_list = [
-    "apple",
-    "banana",
-    "cherry",
-    "orange",
-    "kiwi",
-    "grape",
-    "mango",
-    "pineapple",
-    "watermelon",
-    "lemon",
-]
-
 # Hangman stages as ASCII art
 hangman_stages = [
     """
@@ -88,8 +74,8 @@ hangman_stages = [
 ]
 
 
-def pick_word():
-    """Selects a random word from the word list."""
+def pick_word(word_list):
+    """Selects a random word from the provided word list."""
     return random.choice(word_list)
 
 
@@ -98,9 +84,9 @@ def display_word(word, guessed_letters):
     return " ".join([letter if letter in guessed_letters else "_" for letter in word])
 
 
-def play_game():
+def play_game(word_list):
     """Core logic of the Hangman game."""
-    word = pick_word()
+    word = pick_word(word_list)
     guessed_letters = set()
     lives = len(hangman_stages) - 1
 
